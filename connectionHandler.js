@@ -1,13 +1,20 @@
-var exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca");
+var exampleSocket;
 
-exampleSocket.onopen = function() {
-	console.log("Web socket open!");
-};
+function connect() {
+	exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
 
-exampleSocket.onerror = function() {
-	console.log("Web socket error!");
-};
+	exampleSocket.onopen = function(event) {
+		console.log("Web socket open!");
+	}
 
-exampleSocket.onmessage = function() {
-	console.log("Message received!");
-};
+	exampleSocket.onerror = function(event) {
+		console.log(event);
+	}
+
+	exampleSocket.onmessage = function(event) {
+		console.log(event.data);
+	}
+
+}
+
+connect();
