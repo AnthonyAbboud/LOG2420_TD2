@@ -1,9 +1,63 @@
-i, h1 {
-display: inline-block;}
-
-.header {
-    background-color: #4CA0A2;
-    color:white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#nomGroupe {visibility: hidden;}
+body {
+    font: 13px Helvetica, Arial; 
+    transition: all 0.5s;
+}
+
+section#chatbox form {
+    background: #4CA0A2;
+    padding: 1px;
+    position: fixed;
+    bottom: 0;
+    float : right;
+    width: 100%;
+    height: 50px;
+}
+
+
+section #chatbox form i{
+    width: 75%;
+    height: 100%; 
+    padding: 5px 10px;
+    background: #4CA0A2;
+    float: left;
+    bottom : 0;
+    position : fixed;
+    
+}
+
+section#chatbox form input {
+    border: 9;
+    padding: 5px 10px;
+    width: 90%;
+    height: 100%;
+    margin-right: .5%;
+	font-size: 20px;
+}
+section#chatbox form button {
+    width: 5%;
+    height: 100%;
+    background: #4CA0A2; /*4CA0A2 */    
+    border: none;
+    margin-right: 0.5%;
+    font-size: 17px;
+    color: white;
+ 
+}
+section#chatbox #messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+section#chatbox #messages li {
+    padding: 5px 10px;
+}
+section#chatbox #messages li:nth-child(odd) {
+    background: #eee;
+}
