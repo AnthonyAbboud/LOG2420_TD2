@@ -1,24 +1,19 @@
+function connect() {
+  exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
 
-/* Voir ce site : 
-    https://developer.mozilla.org/fr/docs/WebSockets/Writing_WebSocket_client_applications#Utilisation_de_JSON_pour_transmettres_des_objets
-*/
+  exampleSocket.onopen = function () 
+  {
+      console.log("Web Socket opened!");
+  }
 
-
-var exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
-
-exampleSocket.onopen = function () 
-{
-    console.log("Web Socket opened!");
-}
-
-exampleSocket.onerror = function () 
-{ 
-    console.log("ERROR"); 
-}
+  exampleSocket.onerror = function () 
+  { 
+      console.log("ERROR"); 
+  }
 
 
-exampleSocket.onmessage = function (event) 
-{
+  exampleSocket.onmessage = function (event) 
+  {
     console.log("ok");
   
     var text = "";
@@ -54,16 +49,8 @@ exampleSocket.onmessage = function (event)
           document.getElementById("userlistbox").innerHTML = ul;
           break;
       }
-
-
     }
-    
-    
-    
-   
-    }
-  
-  // exampleSocket.close();
+  }
+}
 
-
-        
+connect();

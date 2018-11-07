@@ -61,3 +61,75 @@ section#chatbox #messages li {
 section#chatbox #messages li:nth-child(odd) {
     background: #eee;
 }
+
+* {
+	box-sizing: border-box;
+	font-family: "Calibri";
+}
+
+a {
+	color:inherit;
+	text-decoration: none;
+}
+
+header {
+	background-color: #EEEEEE;
+}
+
+body {
+	margin: 0;
+}
+
+.fa-circle {
+	background-color: red;
+}
+
+.header-container {
+	height: 60px;
+}
+
+.header-logo {
+	float: left;
+	height: 100%;
+}
+
+.header-logo > a > p, .header-nav > ul > li {
+	display: inline-block;
+}
+
+.header-nav {
+	float: right;
+	height: 100%;
+}
+
+.header-nav > ul {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.header-nav > ul > li {
+	padding-bottom: 30px;
+	padding-right: 20px;
+	height: 100%;
+}
+
+.nav-user-name {
+	margin: 0;
+}
+
+#logo-chat {
+	color: #0294D3;
+}
+
+#logo-chat, #logo-poly {
+	font-size: 30px;
+	margin: 0 0;
+	padding-top: 10px;
+}
+
+#logo-poly {
+	color: #FF671B;
+}
+
+
