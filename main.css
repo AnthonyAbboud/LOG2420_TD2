@@ -1,0 +1,9 @@
+i, h1 {
+display: inline-block;}
+
+.header {
+    background-color: #4CA0A2;
+    color:white;
+}
+
+#nomGroupe {visibility: hidden;}

@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="main.css">
+        <title></title>
 </head>
 <body>
 	<header>
 		<!--TODO: Barre de menu et entete-->
 	</header>
 	<main>
-		<!--TODO: Section de la liste des groupes de discussion-->
-			<!--TODO: Entete de la vue contenant la liste des groupes de discussion-->
+        <!--TODO: Section de la liste des groupes de discussion-->
+            <!--TODO: Entete de la vue contenant la liste des groupes de discussion-->
+        <div class="header">
+            <h3 id="test">Liste des groupes</h3>
+            <h1> Groupes Disponibles</h1> <i class="fas fa-plus-square" onclick="dialogueBox()"> </i> <i class="fas fa-cog"></i>
+        </div>
+        <p id="nomGroupe" ></p>
 			<!--TODO: Liste des groupes de discussion-->
 		<!--TODO: Section de clavardage-->
 			<!--TODO: Entete de la vue des messages-->
 			<!--TODO: Zone de messagerie-->
-	</main>
+    </main>
+<script src ="connectionhandler.js"></script>
+<script src ="channelsObserver.js"></script>
+<script src ="channel.js"></script>
 </body>
+
 </html>
