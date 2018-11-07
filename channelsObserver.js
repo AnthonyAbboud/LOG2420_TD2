@@ -1,3 +1,5 @@
+class ChannelObserver{}
+/*
 var exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
 
 function dialogueBox() {
@@ -20,4 +22,4 @@ function onCreateChannel ()
 
     }
 //    exampleSocket.onmessage=function() 
-//    { console.log(message); }
+//    { console.log(message); }*/

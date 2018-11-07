@@ -1,4 +1,43 @@
-function connect() {
+class ConnectionHandler {
+  constructor(client, messageObserver, channelObserver) {
+    this.client = client;
+    this.messageObserver = messageObserver;
+    this.channelObserver = channelObserver;
+  }
+
+  init() {
+    this.client.onopen = function() {
+      console.log("Connected");
+    };
+
+    this.client.onerror = function() {
+      console.log("Web Socket error!");
+    }
+
+    this.client.onmessage = function(event) {
+      let rawMsg = event.data;
+      let msg = JSON.parse(event.data);
+      console.log(msg);
+
+      switch(msg.eventType) {
+        case "onError":
+          console.log("Error");
+          break;
+        case "onMessage":
+          console.log("Message recu: " + msg.data);
+          break;
+        case "updateChannelsList":
+          console.log("UPDATECHANNELSLIST");
+          break;
+        default:
+          break;
+      }
+    }
+  }
+}
+
+
+/*function connect() {
   exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
 
   exampleSocket.onopen = function () 
@@ -13,9 +52,7 @@ function connect() {
 
 
   exampleSocket.onmessage = function (event) 
-  {
-    console.log("ok");
-  
+  {  
     var text = "";
     var msg = JSON.parse(event.data);
     var time = new Date(msg.date);
@@ -53,4 +90,4 @@ function connect() {
   }
 }
 
-connect();
+connect();*/

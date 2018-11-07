@@ -1,2 +1,2 @@
 /* Cote client */
-
+class MessageObserver {}

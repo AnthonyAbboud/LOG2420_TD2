@@ -32,45 +32,29 @@ class Message {
 
 // Envoi des données vers le serveur en JSON
 function sendText() {
-  console.log("sendtext");
+  console.log("Ready State: " + client.readyState);
+  if($("#text").val() != ''){
     // Création d'un objet msg qui contient les données dont le serveur a besoin pour traiter le message
-    var msg = new Message("onMessage", null, document.getElementById("text").value, null, Date.now());
-
+    var msg = new Message("onMessage", null, document.getElementById("text").value, "testName", Date());
+    console.log(msg);
     // Envoi de l'objet msg à travers une chaîne formatée en JSON
-    if (exampleSocket.readyState==1) {
-      exampleSocket.send(JSON.stringify(msg));
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msg));
       console.log("fait");
     }
-        
-    // Efface le texte de l'élément input afin de recevoir la prochaine ligne de texte que l'utilisateur va saisir
-    document.getElementById("text").value = "";
+  }
+  // Efface le texte de l'élément input afin de recevoir la prochaine ligne de texte que l'utilisateur va saisir
+  document.getElementById("text").value = "";
 }
 
-document.getElementById("bouton_envoyer").addEventListener("keypress", function(e){
-  var key = e.which || e.keyCode;
-  if(key == 13){
-    sendText();
-  }
+
+$("#bouton_envoyer").keypress(function(e) { 
+    var key = e.which || e.keyCode;
+    if(key == 13){
+      sendText();
+    }
 });
-document.getElementById("bouton_envoyer").addEventListener("click", sendText);
 
-//Réception des données du serveur et interpretation JSON
-//voir connectionHandler.js
+$("#bouton_envoyer").click(sendText);
 
-
-
-  // Ajouter un EventListener
-
-/*
-
-  var bouton = document.getElementsByClassName("bouton_envoyer"); //bouton d'envoi du message 
-
-  bouton.addEventListener('click',function(e){ // on écoute l'évènement 'click' sur le bouton permettant d'envoyer le message 
-  e.preventDefault(); // on stoppe la propagation 
-  exampleSocket.sendMessage(); // on envoie un message vers le serveur
-  console.log("boucle eventListener");
-  return false;
-} , true) ; 
-
-*/ 
 
