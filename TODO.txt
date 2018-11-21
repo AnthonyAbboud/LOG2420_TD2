@@ -1,7 +1,4 @@
-- FIRST TODO: S'assurer que ce qui est déjà implémenté à une bonne vue sur les écrans du laboratoire ou vos laptop. J'ai seulement tester sur un écran du size de mon laptop.
-
 Barre de menu  et entête
-- TODO: Logo (demander au prof ce que veut dire ''rafraichir la page sans faire une redirection'', donc faut faire quoi?
 
 - TODO: Navigation
 	- Éviter le refraîchissement de page lorsqu'on clique sur ces boutons
@@ -15,7 +12,8 @@ Barre de menu  et entête
 
 
 Section de clavardage
-- TODO: Entête de la vue des messages, s'assurer a joint le groupe avant de permettre l'affichage du groupe actif.
+- TODO: Entête de la vue des messages, s'assurer a join le groupe avant de permettre l'affichage du groupe actif.
+
 
 - TODO (RESOLVED): Zone de messagerie
 	- Afficher le nom des usagers à côté des bulles 
@@ -26,6 +24,7 @@ Section de clavardage
 	
 - TODO (RESOLVED) : Boîte de saisie
 	- Boîte de saisie active par défaut (pas besoin d'avoir à aller cliquer dessus pour écrire)
+
 
 Section de la liste des groupes de discussion
 - TODO (RESOLVED): l'entête de la vue contenant la liste des groupes disponibles
@@ -48,12 +47,3 @@ Section de la liste des groupes de discussion
 - BONUS: Meilleure présentation de la liste des groupes de discussion
 
 - TODO: S'assurer que tout fonctionne sur CHROME et FIREFOX
-
-**STRUCTURES**
-- messagesList (messagesObserver.js)
-	- Type: Map()
-	- Contient (key,value): key = channelID, value = messages array
-
-- channelsList (channelsObserver.js)
-	- Type: Map()
-	- Contient (key,value): key = channelID, value = channel object
