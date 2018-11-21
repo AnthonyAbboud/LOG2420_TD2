@@ -78,14 +78,51 @@ header {
 }
 
 .message {
-    width: 50%;
+    width: 40%;
     word-wrap: break-word;
     padding: 4px;
-    margin-left: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-left: 2%;
     background-color: #e7e7e7;
     border-radius: 4px;
+}
+
+.message-date-left {
+    margin-left: 2%;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 10pt;
+}
+
+.message-date-right {
+    margin-left: 50%;
+    margin-right: 5%;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333333;
+    float: right;
+    font-size: 10pt;
+}
+
+.message-self {
+    width: 40%;
+    word-wrap: break-word;
+    padding: 4px;
+    margin-left: 55%;
+    margin-top: 20px;
+    margin-bottom: 0;
+    background-color: #0294d3;
+    border-radius: 4px;
+    color: #fff;
+    text-align: right;
+}
+
+.message-sender {
+    margin-left: 2%;
+    margin-top: 20px;
+    margin-bottom: 0;
+    color: #a3a3a3;
+    font-size: 10pt;
 }
 
 .chat-box{
@@ -122,6 +159,7 @@ header {
     height: 89%;
     width: 100%;
     overflow-y: auto;
+    resize: none;
 }
 
 .send-button {
@@ -201,7 +239,7 @@ header {
     border-radius: 8px;
     font-size: 10pt;
     color: #4e90cc;
-    width: 50%;
+    display: inline;
 }
 
 #group-list-star-icon, #group-list-minus-icon, #group-list-plus-icon {
