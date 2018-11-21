@@ -1,5 +1,5 @@
 body {
-    width: 75%;
+    width: 100%;
     margin: 0;
     height: 99vh;
     border: 1px solid #eaebeb;
@@ -151,7 +151,7 @@ header {
 }
 
 #groupes-disponibles-titre, .fa-plus, .group-line2 > .fa-cog {
-    box-sizing: border-box;\
+    box-sizing: border-box;
     vertical-align: bottom;
 }
 
@@ -201,7 +201,7 @@ header {
     border-radius: 8px;
     font-size: 10pt;
     color: #4e90cc;
-    width: 50%;
+    display: inline;
 }
 
 #group-list-star-icon, #group-list-minus-icon, #group-list-plus-icon {
@@ -227,6 +227,8 @@ header {
 #group-list-name > strong {
     color: #4d6d9c;
 }
+
+#nomGroupe {visibility: hidden;}
 
 /** {
     margin: 0;
@@ -318,4 +320,5 @@ i, h1 {
         color:white;
     }
     
-    #nomGroupe {visibility: hidden;}*/
+    #nomGroupe {visibility: hidden;} 
+    */

@@ -36,4 +36,24 @@ class ChannelObserver{
       }
     }
   }
+
+  onCreateChannel() {
+    var ID='_' + Math.random().toString(36).substr(2, 9);
+    var msg = new Message("onCreateChannel", ID, document.getElementById("nomGroupe").innerHTML, "", Date());
+
+    var name=document.getElementById("nomGroupe").innerHTML;
+    if (client.readyState==1) {
+        client.send(JSON.stringify(msg));
+  }
+    var channel=new Channel(ID,name,0,msg,1);
+    console.log(channel);
+  }
+}
+
+let instance=new ChannelObserver;
+function dialogueBox() {
+    var box=prompt("Saisir nom du groupe");
+    document.getElementById("nomGroupe").innerHTML=box;
+    if (document.getElementById("nomGroupe")!="")
+        instance.onCreateChannel();
 }

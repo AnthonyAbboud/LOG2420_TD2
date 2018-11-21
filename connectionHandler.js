@@ -24,7 +24,7 @@ class ConnectionHandler {
           console.log("ONCREATECHANNEL");
           break;
         case "onError":
-          console.log("Error");
+          alert(msg.data);
           break;
         case "onGetChannel":
           messageObserver.setMessagesActiveChannel(msg.data);
