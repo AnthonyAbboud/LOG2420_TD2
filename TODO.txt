@@ -1,0 +1,58 @@
+- FIRST TODO: S'assurer que ce qui est déjà implémenté à une bonne vue sur les écrans du laboratoire ou vos laptop. J'ai seulement tester sur un écran du size de mon laptop.
+
+Barre de menu  et entête
+- TODO: Logo (demander au prof ce que veut dire ''rafraichir la page sans faire une redirection'', donc faut faire quoi?
+
+- TODO: Navigation
+	- Éviter le refraîchissement de page lorsqu'on clique sur ces boutons
+	- Le nom de l'usager doit apparaître en à la place de User
+	- Le badge de notifications doit apparaître/disparaître lorsque l'usager reçoit un nouveau message des channels auxquels il est inscrit.
+	- Esthétisme
+	
+- BONUS:
+	- Se connecter au serveur avec un autre nom d'utilisateur
+	- Ajouter une option de changement de la langue de l'interface
+
+
+Section de clavardage
+- TODO: Entête de la vue des messages, s'assurer a joint le groupe avant de permettre l'affichage du groupe actif.
+
+- TODO: Zone de messagerie
+	- Afficher le nom des usagers à côté des bulles
+	- Affichage la date et l'heure + formattage
+	- Afficher nos propres messages plutôt à droite, en bleu, et ne pas afficher notre nom
+	- Traiter les liens et images
+	- Afficher les messages d'événements d'une couleur différente
+	
+- TODO: Boîte de saisie
+	- Boîte de saisie active par défaut (pas besoin d'avoir à aller cliquer dessus pour écrire)
+
+Section de la liste des groupes de discussion
+- TODO: l'entête de la vue contenant la liste des groupes disponibles
+	- Icône d'ajout du groupe de discussion: implémenter le onCreateChannel + écoute du canal onError. Ajouter le groupe que si onCreateChannel passe.
+
+- BONUS: 
+	- Activer/Désactiver un court son adapté (bip) lors de la réception d'un message
+	- Limiter le nombre de groupes à afficher
+	
+- TODO: Liste des groupes de discussion
+	- Fix la bordure du label ''défaut'' pour le channel général
+	- Implémenter l'action de l'icône plus (ajouter un channel à la liste)
+	- Implémenter l'action de l'icône moins (retirer un channel de la liste)
+	- Mise-à-jour de la vue de cette liste (défaut->moins->plus)
+	- Implémenter les événement onJoinChannel et onLeaveChannel
+	- Sélection d'un groupe: afficher le nom dans l'entête du groupe actif (voir plus haut)
+	- Charge la liste des messages de ce channel
+	
+- BONUS: Meilleure présentation de la liste des groupes de discussion
+
+- TODO: S'assurer que tout fonctionne sur CHROME et FIREFOX
+
+**STRUCTURES**
+- messagesList (messagesObserver.js)
+	- Type: Map()
+	- Contient (key,value): key = channelID, value = messages array
+
+- channelsList (channelsObserver.js)
+	- Type: Map()
+	- Contient (key,value): key = channelID, value = channel object

@@ -20,14 +20,28 @@ class ConnectionHandler {
       console.log(msg);
 
       switch(msg.eventType) {
+        case "onCreateChannel":
+          console.log("ONCREATECHANNEL");
+          break;
         case "onError":
           console.log("Error");
           break;
+        case "onGetChannel":
+          messageObserver.setMessagesActiveChannel(msg.data);
+          break;
+        case "onJoinChannel":
+          channelObserver.addChannel(msg);
+          break;
+        case "onLeaveChannel":
+          console.log("ONLEAVECHANNEL");
+          break;
         case "onMessage":
-          console.log("Message recu: " + msg.data);
+          //messageObserver.addMessage(msg);
+          console.log(msg.data);
           break;
         case "updateChannelsList":
-          console.log("UPDATECHANNELSLIST");
+          channelObserver.updateChannelsList(msg.data);
+          messageObserver.getMessagesActiveChannel(channelObserver.activeChannel.id);
           break;
         default:
           break;
@@ -35,59 +49,3 @@ class ConnectionHandler {
     }
   }
 }
-
-
-/*function connect() {
-  exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
-
-  exampleSocket.onopen = function () 
-  {
-      console.log("Web Socket opened!");
-  }
-
-  exampleSocket.onerror = function () 
-  { 
-      console.log("ERROR"); 
-  }
-
-
-  exampleSocket.onmessage = function (event) 
-  {  
-    var text = "";
-    var msg = JSON.parse(event.data);
-    var time = new Date(msg.date);
-    var timeStr = time.toLocaleTimeString();    
-    console.log(msg);
-
-    if(msg.channelId="666"){
-
-      switch(msg.eventType) {
-        case "id":
-          clientID = msg.id;
-          setUsername();
-          break;
-        case "username":
-          text = "<b>User <em>" + msg.name + "</em> signed in at " + timeStr + "</b><br>";
-          break;
-        case "onMessage":
-        {
-          text = "(" + timeStr + ") <b>" + msg.name + "</b>: " + msg.text + "<br>";
-        }
-          
-          break;
-        case "rejectusername":
-          text = "<b>Your username has been set to <em>" + msg.name + "</em> because the name you chose is in use.</b><br>"
-          break;
-        case "userlist":
-          var ul = "";
-          for (i=0; i < msg.users.length; i++) {
-            ul += msg.users[i] + "<br>";
-          }
-          document.getElementById("userlistbox").innerHTML = ul;
-          break;
-      }
-    }
-  }
-}
-
-connect();*/

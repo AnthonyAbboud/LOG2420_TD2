@@ -1,25 +1,39 @@
-class ChannelObserver{}
-/*
-var exampleSocket = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice");
+class ChannelObserver{
+  constructor(){
+    this.channelsList = new Map();
+    this.activeChannel;
+  }
 
-function dialogueBox() {
-    var box = prompt("", "Saisir Nom du Groupe");
-   document.getElementById("nomGroupe").innerHTML=box;
-    if (document.getElementById("nomGroupe").textContent!=""){ 
-        console.log("test");
-        onCreateChannel();
+  addChannel(channelInfo){
+    console.log(channelInfo);
+  }
+
+  setActiveChannel(channel){
+    this.activeChannel = channel;
+    $(".groupe-actif").append('<h2 id="groupe-actif-nom">'+ this.activeChannel.name +'</h2>');
+  }
+
+  updateChannelsList(data){
+    let channelBckColor = "#f7f7f7";
+    for(let index = 0; index < data.length; index++){
+      let channel = new Channel(data[index].id, data[index].name, data[index].joinStatus, data[index].messages, data[index].numberOfUsers);
+      if(channel.name == "Général"){
+        this.setActiveChannel(channel);
+        $(".group-list-area").prepend('<div class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="group-list-star-icon"><i class="fas fa-star"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"><p>défaut</p></div></div>');
+      } else {
+        if(channel.joinStatus){
+          $(".group-list-area").append('<div class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="group-list-minus-icon"><i class="fas fa-minus"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');  
+        } else {
+          $(".group-list-area").append('<div class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="group-list-plus-icon"><i class="fas fa-plus"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');
+        }
+      }
+      this.channelsList.set(channel.id, channel);
+
+      if(channelBckColor == "#f7f7f7"){
+        channelBckColor = "#eaeaea";
+      } else {
+        channelBckColor = "#f7f7f7";
+      }
     }
-   // document.getElementById("nomGroupe").addEventListener("click",onCreateChannel);
-  // return (document.getElementById("nomGroupe").textContent);
-  
-//   if (document.getElementById("nomGroupe").textContent!="")
-//     onCreateChannel();
+  }
 }
-var message= new MessageEvent("onCreateChannel", {detail:document.getElementById("nomGroupe").textContent});
-function onCreateChannel () 
-   {
-      console.log("test");
-
-    }
-//    exampleSocket.onmessage=function() 
-//    { console.log(message); }*/

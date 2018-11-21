@@ -29,32 +29,3 @@ class Message {
         this.timestamp = timestamp;
     }
 }
-
-// Envoi des données vers le serveur en JSON
-function sendText() {
-  console.log("Ready State: " + client.readyState);
-  if($("#text").val() != ''){
-    // Création d'un objet msg qui contient les données dont le serveur a besoin pour traiter le message
-    var msg = new Message("onMessage", null, document.getElementById("text").value, "testName", Date());
-    console.log(msg);
-    // Envoi de l'objet msg à travers une chaîne formatée en JSON
-    if (client.readyState==1) {
-      client.send(JSON.stringify(msg));
-      console.log("fait");
-    }
-  }
-  // Efface le texte de l'élément input afin de recevoir la prochaine ligne de texte que l'utilisateur va saisir
-  document.getElementById("text").value = "";
-}
-
-
-$("#bouton_envoyer").keypress(function(e) { 
-    var key = e.which || e.keyCode;
-    if(key == 13){
-      sendText();
-    }
-});
-
-$("#bouton_envoyer").click(sendText);
-
-
