@@ -20,7 +20,7 @@ Section de clavardage
 	- Affichage la date et l'heure + formattage 
 	- Afficher nos propres messages plutôt à droite, en bleu, et ne pas afficher notre nom
 	- Traiter les liens et images
-	- TODO Afficher les messages d'événements d'une couleur différente
+- TODO Afficher les messages d'événements d'une couleur différente
 	
 - TODO (RESOLVED) : Boîte de saisie
 	- Boîte de saisie active par défaut (pas besoin d'avoir à aller cliquer dessus pour écrire)
@@ -38,7 +38,7 @@ Section de la liste des groupes de discussion
 - TODO: Liste des groupes de discussion
 	-(RESOLVED) Fix la bordure du label ''défaut'' pour le channel général
 	- Implémenter l'action de l'icône plus (ajouter un channel à la liste)
-	- Implémenter l'action de l'icône moins (retirer un channel de la liste)
+	-(RESOLVED) Implémenter l'action de l'icône moins (retirer un channel de la liste)
 	- Mise-à-jour de la vue de cette liste (défaut->moins->plus)
 	- Implémenter les événement onJoinChannel et onLeaveChannel
 	- Sélection d'un groupe: afficher le nom dans l'entête du groupe actif (voir plus haut)

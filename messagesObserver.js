@@ -15,46 +15,15 @@ class MessageObserver {
 	}
 
 	displayMessage(msg) {
-		let msgDate = new Date(msg.timestamp);
-		let estTimezoneHours = msgDate.getUTCHours() - 5;
-		let stringFormattedHours;
-		let stringFormattedMinutes;
-		let msgDateFormatted;
-		estTimezoneHours < 10 ? (stringFormattedHours='0'+estTimezoneHours) : stringFormattedHours=estTimezoneHours;
-		msgDate.getUTCMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getUTCMinutes()) : stringFormattedMinutes=msgDate.getUTCMinutes();
-		msgDateFormatted = week_FR[msgDate.getUTCDay()] + ' ' + msgDate.getUTCDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
-
-		if(msg.sender == username){
-			$(".chat-area").append('<div class="message-self">' + msg.data + '</div>');
-			$(".chat-area").append('<div class="message-date-right">' + msgDateFormatted + '</div>');
-		} else {
-			$(".chat-area").append('<div class="message-sender">' + msg.sender + '</div>');
-			$(".chat-area").append('<div class="message">' + msg.data + '</div>');
-			$(".chat-area").append('<div class="message-date-left">' + msgDateFormatted + '</div>');
-		}
+		console.log(msg.data);
+		$(".chat-area").append('<div class="message">' + msg.data + '</div>');
 		$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
 	}
 
 	displayOldMessages(oldMsgList){
-		let msgDate;
-		let msgDateFormatted;
 		for(let i = 0; i < oldMsgList.length; i++){
-			msgDate = new Date(oldMsgList[i].timestamp);
-			let estTimezoneHours = msgDate.getUTCHours() - 5;
-			let stringFormattedHours;
-			let stringFormattedMinutes;
-			estTimezoneHours < 10 ? (stringFormattedHours='0'+estTimezoneHours) : stringFormattedHours=estTimezoneHours;
-			msgDate.getUTCMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getUTCMinutes()) : stringFormattedMinutes=msgDate.getUTCMinutes();
-			msgDateFormatted = week_FR[msgDate.getUTCDay()] + ' ' + msgDate.getUTCDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
-
-			if(oldMsgList[i].sender == username){
-				$(".chat-area").append('<div class="message-self">' + oldMsgList[i].data + '</div>');
-				$(".chat-area").append('<div class="message-date-right">' + msgDateFormatted + '</div>');
-			} else {
-				$(".chat-area").append('<div class="message-sender">' + oldMsgList[i].sender + '</div>');
-				$(".chat-area").append('<div class="message">' + oldMsgList[i].data + '</div>');
-				$(".chat-area").append('<div class="message-date-left">' + msgDateFormatted + '</div>');
-			}
+			console.log(oldMsgList[i])
+			$(".chat-area").append('<div class="message">' + oldMsgList[i].data + '</div>');
 		}
 		$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
 	}
