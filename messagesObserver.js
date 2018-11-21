@@ -4,6 +4,22 @@ class MessageObserver {
 		this.messagesList = new Map();
 	}
 
+	addMessage(msg) {
+		let messageArray;
+		if(this.messagesList.has(msg.channelId)){
+			messageArray = this.messagesList.get(msg.channelId);
+			this.messagesList.delete(msg.channelId);
+			this.messagesList.set(msg.channelId, messageArray);
+			this.displayMessage(msg);
+		}
+	}
+
+	displayMessage(msg) {
+		console.log(msg.data);
+		$(".chat-area").append('<div class="message">' + msg.data + '</div>');
+		$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
+	}
+
 	displayOldMessages(oldMsgList){
 		for(let i = 0; i < oldMsgList.length; i++){
 			console.log(oldMsgList[i])

@@ -36,8 +36,7 @@ class ConnectionHandler {
           console.log("ONLEAVECHANNEL");
           break;
         case "onMessage":
-          //messageObserver.addMessage(msg);
-          console.log(msg.data);
+          messageObserver.addMessage(msg);
           break;
         case "updateChannelsList":
           channelObserver.updateChannelsList(msg.data);
