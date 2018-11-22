@@ -26,7 +26,6 @@
         					</g>
     					</g>
 					</svg>
-
 				</a>
 			</div>
 			<nav class="header-nav">
@@ -59,17 +58,14 @@
 	</header>
 	<main>
 		<div class="main-left">
-			<div class="groupe-actif">
-				<h3 id="groupe-actif-titre">Group actif:</h3>
-			</div>
-			<div class="chat-area">
-			</div>
+			<div class="groupe-actif"></div>
+			<div class="chat-area"></div>
 			<div class="chat-box">
 				<div class="like-button">
 					<i class="far fa-thumbs-up fa-2x"></i>
 				</div>
 				<div class="message-box">
-					<input type="text" id="message-input" placeholder="Votre message içi">
+					<textarea type="text" id="message-input" placeholder="Votre message içi" autofocus></textarea>
 				</div>
 				<div class="send-button">
 					<button type="button" id="btn-send">Envoyer</button>
@@ -83,38 +79,12 @@
 				</div>
 				<div class="group-line2">
 					<h2 id="groupes-disponibles-titre">Groupes disponibles</h2>
-					<i class="fas fa-plus" onclick="dialogueBox()"> <i id="nomGroupe"></i></i>
-					<i class="fas fa-cog"></i>
-                </div>
+					<i id="create-group-button" class="fas fa-plus"></i>
+					<i id="group-settings-button" class="fas fa-cog"></i>
+				</div>
 			</div>
 			<div class="group-list-area"></div>
 		</div>
-
-
-		<!--
-		<div class="header">
-			<h3 id="test">Liste des groupes</h3>
-			<h1>Groupes disponibles</h1><i class="fas fa-plus-square" onclick="dialogueBox()"></i><i class="fas fa-cog"></i>
-		</div>
-		<p id=nomGroupe></p>
-		<section id="chatbox">
-				<ul id="messages"></ul>
-				<form action="">
-					<i class="far fa-thumbs-up"></i>
-					<input type="text" class="bouton_envoyer" id="text" autocomplete="off"/><button type="button" id="bouton_envoyer">Envoyer</button>
-				</form>
-				<fieldset><legend>Message</legend> 
-					<div id="message"></div>
-				  </fieldset>
-		</section>-->
-
-	
-		<!--TODO: Section de la liste des groupes de discussion-->
-			<!--TODO: Entete de la vue contenant la liste des groupes de discussion-->
-			<!--TODO: Liste des groupes de discussion-->
-		<!--TODO: Section de clavardage-->
-			<!--TODO: Entete de la vue des messages-->
-			<!--TODO: Zone de messagerie-->
 	</main>
 
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>

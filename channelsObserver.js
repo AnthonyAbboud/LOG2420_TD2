@@ -1,32 +1,72 @@
 class ChannelObserver{
   constructor(){
     this.channelsList = new Map();
-    this.activeChannel;
+    this.activeChannelID = "";
+    this.activeChannelName = "";
   }
 
-  addChannel(channelInfo){
-    console.log(channelInfo);
+  createChannel(){
+    let channelNameBox = prompt("Pour créer un channel, entrez un nom (5 à 20 caractères):");
+    let generatedChannelID = '_' + Math.random().toString(36).substr(2,9);
+    let msgRequestCreateChannel = new Message("onCreateChannel", generatedChannelID, channelNameBox, username, Date());
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msgRequestCreateChannel));
+    } 
+  }
+
+  joinChannel(channel){
+    if(channel.joinStatus){
+      channelObserver.setActiveChannel(channel);
+      messageObserver.getMessagesActiveChannel(this.activeChannelID);   
+    }
+  }
+
+  requestJoinChannel(channelID){
+    let msgRequestJoinChannel = new Message("onJoinChannel", channelID, "", username, Date());
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msgRequestJoinChannel));
+    }
+  }
+
+  requestLeaveChannel(channelID){
+    let msgRequestLeaveChannel = new Message("onLeaveChannel", channelID, "", username, Date());
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msgRequestLeaveChannel));
+    }
   }
 
   setActiveChannel(channel){
-    this.activeChannel = channel;
-    $(".groupe-actif").append('<h2 id="groupe-actif-nom">'+ this.activeChannel.name +'</h2>');
+    this.activeChannelName = channel.name;
+    this.activeChannelID = channel.id
+    $(".groupe-actif").empty();
+    $(".groupe-actif").append('<h3 id="groupe-actif-titre">Groupe actif:</h3><h2 id="groupe-actif-nom">'+ this.activeChannelName +'</h2>');
   }
 
   updateChannelsList(data){
+    $(".group-list-area").empty();
     let channelBckColor = "#f7f7f7";
     for(let index = 0; index < data.length; index++){
       let channel = new Channel(data[index].id, data[index].name, data[index].joinStatus, data[index].messages, data[index].numberOfUsers);
       if(channel.name == "Général"){
-        this.setActiveChannel(channel);
-        $(".group-list-area").prepend('<div class="group-list-elements"  style="background-color: ' + channelBckColor + ';"><div id="group-list-star-icon"><i class="fas fa-star"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"><p>défaut</p></div></div>');
+        if(this.activeChannelName == "" && this.activeChannelID == "") {channelObserver.setActiveChannel(channel);}
+        $(".group-list-area").prepend('<div id="channel_' + channel.id + '" class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="icon_' + channel.id + '" class="group-list-star-icon"><i class="fas fa-star"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"><p>défaut</p></div></div>');
       } else {
         if(channel.joinStatus){
-          $(".group-list-area").append('<div class="group-list-elements" id="area" style="background-color: ' + channelBckColor + ';"><div id="group-list-minus-icon"><i class="fas fa-minus" onclick=removeChannel()></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');  
+          $(".group-list-area").append('<div id="channel_' + channel.id + '" class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="icon_' + channel.id + '" class="group-list-minus-icon"><i class="fas fa-minus"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');  
+          $('#icon_' + channel.id + ' > .fa-minus').click(function(){
+            channelObserver.requestLeaveChannel(channel.id);
+          });        
         } else {
-          $(".group-list-area").append('<div class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="group-list-plus-icon"><i class="fas fa-plus"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');
+          $(".group-list-area").append('<div id="channel_' + channel.id + '" class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="icon_' + channel.id + '" class="group-list-plus-icon"><i class="fas fa-plus"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"></div></div>');
+          $('#icon_' + channel.id + ' > .fa-plus').click(function(){
+            channelObserver.requestJoinChannel(channel.id);
+          });
         }
       }
+      $('#channel_' + channel.id).click(function(){
+         channelObserver.joinChannel(channel);
+      })
+      //$(".group-list-elements").click(function)
       this.channelsList.set(channel.id, channel);
 
       if(channelBckColor == "#f7f7f7"){
@@ -36,28 +76,4 @@ class ChannelObserver{
       }
     }
   }
-
-  onCreateChannel() {
-    var ID='_' + Math.random().toString(36).substr(2, 9);
-    var msg = new Message("onCreateChannel", ID, document.getElementById("nomGroupe").innerHTML, "", Date());
-
-    var name=document.getElementById("nomGroupe").innerHTML;
-    if (client.readyState==1) {
-        client.send(JSON.stringify(msg));
-  }
-    var channel=new Channel(ID,name,0,msg,1);
-    console.log(channel);
-  }
-}
-
-let instance=new ChannelObserver;
-function dialogueBox() {
-    var box=prompt("Saisir nom du groupe");
-    document.getElementById("nomGroupe").innerHTML=box;
-    if (document.getElementById("nomGroupe")!="")
-        instance.onCreateChannel();
-}
-function removeChannel() {
-    var element = document.getElementById("area");
-    element.parentNode.removeChild(element);
 }

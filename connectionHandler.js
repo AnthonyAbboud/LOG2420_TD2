@@ -20,27 +20,20 @@ class ConnectionHandler {
       console.log(msg);
 
       switch(msg.eventType) {
-        case "onCreateChannel":
-          console.log("ONCREATECHANNEL");
-          break;
         case "onError":
-          alert(msg.data);
+          window.alert(msg.data);
           break;
         case "onGetChannel":
           messageObserver.setMessagesActiveChannel(msg.data);
           break;
-        case "onJoinChannel":
-          channelObserver.addChannel(msg);
-          break;
-        case "onLeaveChannel":
-          console.log("ONLEAVECHANNEL");
-          break;
         case "onMessage":
           messageObserver.addMessage(msg);
+          console.log(channelObserver);
+          console.log(messageObserver);
           break;
         case "updateChannelsList":
           channelObserver.updateChannelsList(msg.data);
-          messageObserver.getMessagesActiveChannel(channelObserver.activeChannel.id);
+          messageObserver.getMessagesActiveChannel(channelObserver.activeChannelID);
           break;
         default:
           break;

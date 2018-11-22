@@ -1,4 +1,4 @@
-Barre de menu  et entête
+﻿Barre de menu  et entête
 
 - TODO: Navigation
 	- Éviter le refraîchissement de page lorsqu'on clique sur ces boutons
@@ -14,33 +14,18 @@ Barre de menu  et entête
 Section de clavardage
 - TODO: Entête de la vue des messages, s'assurer a join le groupe avant de permettre l'affichage du groupe actif.
 
-
-- TODO (RESOLVED): Zone de messagerie
-	- Afficher le nom des usagers à côté des bulles 
-	- Affichage la date et l'heure + formattage 
-	- Afficher nos propres messages plutôt à droite, en bleu, et ne pas afficher notre nom
-	- Traiter les liens et images
-- TODO Afficher les messages d'événements d'une couleur différente
-	
-- TODO (RESOLVED) : Boîte de saisie
-	- Boîte de saisie active par défaut (pas besoin d'avoir à aller cliquer dessus pour écrire)
-
+- TODO: Zone de messagerie
+	- Afficher les messages d'événements d'une couleur différente
 
 Section de la liste des groupes de discussion
-- TODO (RESOLVED): l'entête de la vue contenant la liste des groupes disponibles
-	- Icône d'ajout du groupe de discussion: implémenter le onCreateChannel + écoute du canal onError. Ajouter le groupe que si onCreateChannel passe.
-- TODO	- Mettre les groupes crées au début
-	- Arranger alignement 
+- TODO: l'entête de la vue contenant la liste des groupes disponibles
+
 - BONUS: 
 	- Activer/Désactiver un court son adapté (bip) lors de la réception d'un message
 	- Limiter le nombre de groupes à afficher
 	
 - TODO: Liste des groupes de discussion
-	-(RESOLVED) Fix la bordure du label ''défaut'' pour le channel général
-	- Implémenter l'action de l'icône plus (ajouter un channel à la liste)
-	-(RESOLVED) Implémenter l'action de l'icône moins (retirer un channel de la liste)
 	- Mise-à-jour de la vue de cette liste (défaut->moins->plus)
-	- Implémenter les événement onJoinChannel et onLeaveChannel
 	- Sélection d'un groupe: afficher le nom dans l'entête du groupe actif (voir plus haut)
 	- Charge la liste des messages de ce channel
 	
