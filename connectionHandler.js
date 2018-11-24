@@ -7,6 +7,7 @@ class ConnectionHandler {
 
   init() {
     this.client.onopen = function() {
+      console.log("Connected!");
     };
 
     this.client.onerror = function() {

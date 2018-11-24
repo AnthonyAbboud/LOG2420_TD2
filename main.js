@@ -6,11 +6,7 @@ var week_ENG = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 var week_FR = ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM', 'DIM']; 
 var lbl_activeGroup = ['Active group: ', 'Groupe actif: '];
 
-/* General Functions */
-function updateView(){
-	$('.nav-user-name').append(username);
-}
-
+/* General Observer(mainly for header and notifications) */
 class MainObserver {
 	constructor(){
 	}
@@ -19,6 +15,7 @@ class MainObserver {
 		nbNotifications += 1;
 		$('.nb-notif').empty().append(nbNotifications);
 		$('.nb-notif').show();
+		
 	}
 
 	resetNotifCanceler(){
@@ -26,9 +23,13 @@ class MainObserver {
 		$('.nb-notif').empty();
 		$('.nb-notif').hide();
 	}
+
+	updateView(){
+		$('.nav-user-name').append(username);
+	}
 }
 
-var username = "nameTest";
+var username = "Guest";
 let url = "ws://log2420-nginx.info.polymtl.ca/chatservice?username="
 var client = new WebSocket(url+username);
 
@@ -40,7 +41,7 @@ var connectionHandler = new ConnectionHandler(client, messageObserver, channelOb
 
 
 connectionHandler.init();
-updateView();
+mainObserver.updateView();
 
 /* Event listeners */
 $("#message-input").keypress(function(e) { 
