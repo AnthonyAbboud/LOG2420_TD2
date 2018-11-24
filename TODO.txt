@@ -1,10 +1,4 @@
 ﻿Barre de menu  et entête
-
-- TODO: Navigation
-	- Éviter le refraîchissement de page lorsqu'on clique sur ces boutons
-	- Le nom de l'usager doit apparaître en à la place de User
-	- Le badge de notifications doit apparaître/disparaître lorsque l'usager reçoit un nouveau message des channels auxquels il est inscrit.
-	- Esthétisme
 	
 - BONUS:
 	- Se connecter au serveur avec un autre nom d'utilisateur

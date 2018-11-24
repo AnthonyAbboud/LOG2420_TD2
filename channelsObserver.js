@@ -53,7 +53,8 @@ class ChannelObserver{
   joinChannel(channel){
     if(channel.joinStatus){
       channelObserver.setActiveChannel(channel);
-      messageObserver.getMessagesActiveChannel(this.activeChannelID);   
+      messageObserver.getMessagesActiveChannel(this.activeChannelID);
+      mainObserver.resetNotifCanceler();   
     }
     $("#message-input").val("").focus();
   }

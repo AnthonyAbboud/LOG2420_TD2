@@ -11,20 +11,23 @@ class MessageObserver {
 			messageArray.push(msg);
 			this.messagesList.delete(msg.channelId);
 			this.messagesList.set(msg.channelId, messageArray);
-			this.displayMessage(msg);
+			if(msg.channelId == channelObserver.activeChannelID){
+				messageObserver.displayMessage(msg);	
+			}
+			
 		}
-		console.log(this.messagesList);
+		messageObserver.verifyNotifRequired(msg);
 	}
 
 	displayMessage(msg) {
 		let msgDate = new Date(msg.timestamp);
-		let estTimezoneHours = msgDate.getUTCHours() - 5;
+		let estTimezoneHours = msgDate.getHours();
 		let stringFormattedHours;
 		let stringFormattedMinutes;
 		let msgDateFormatted;
 		estTimezoneHours < 10 ? (stringFormattedHours='0'+estTimezoneHours) : stringFormattedHours=estTimezoneHours;
-		msgDate.getUTCMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getUTCMinutes()) : stringFormattedMinutes=msgDate.getUTCMinutes();
-		msgDateFormatted = week_FR[msgDate.getUTCDay()] + ' ' + msgDate.getUTCDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
+		msgDate.getMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getMinutes()) : stringFormattedMinutes=msgDate.getMinutes();
+		msgDateFormatted = week_FR[msgDate.getDay()] + ' ' + msgDate.getDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
 
 		if(msg.sender == 'Admin'){
 			$(".chat-area").append('<div class="message-sender-admin">' + msg.sender + '</div>');
@@ -73,5 +76,11 @@ class MessageObserver {
 		let messageArray = getChannelResponse.messages;
 		this.messagesList.set(getChannelResponse.id, messageArray);
 		this.displayOldMessages(this.messagesList.get(getChannelResponse.id));
+	}
+
+	verifyNotifRequired(msg) {
+		if(msg.channelID != channelObserver.activeChannelID){
+			mainObserver.incrementNotif(msg);
+		}
 	}
 }

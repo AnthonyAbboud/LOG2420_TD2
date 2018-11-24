@@ -7,17 +7,15 @@ class ConnectionHandler {
 
   init() {
     this.client.onopen = function() {
-      console.log("Connected");
     };
 
     this.client.onerror = function() {
-      console.log("Web Socket error!");
+      window.alert("Connection to Web Socket error!");
     }
 
     this.client.onmessage = function(event) {
       let rawMsg = event.data;
       let msg = JSON.parse(event.data);
-      console.log(msg);
 
       switch(msg.eventType) {
         case "onError":
