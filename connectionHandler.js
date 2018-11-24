@@ -28,8 +28,6 @@ class ConnectionHandler {
           break;
         case "onMessage":
           messageObserver.addMessage(msg);
-          console.log(channelObserver);
-          console.log(messageObserver);
           break;
         case "updateChannelsList":
           channelObserver.updateChannelsList(msg.data);

@@ -21,6 +21,7 @@ $("#message-input").keypress(function(e) {
     var key = e.which || e.keyCode;
     if(key == 13){
       messageObserver.sendMessage();
+      return false;
     }
 });
 

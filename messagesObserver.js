@@ -8,10 +8,12 @@ class MessageObserver {
 		let messageArray;
 		if(this.messagesList.has(msg.channelId)){
 			messageArray = this.messagesList.get(msg.channelId);
+			messageArray.push(msg);
 			this.messagesList.delete(msg.channelId);
 			this.messagesList.set(msg.channelId, messageArray);
 			this.displayMessage(msg);
 		}
+		console.log(this.messagesList);
 	}
 
 	displayMessage(msg) {
@@ -24,7 +26,12 @@ class MessageObserver {
 		msgDate.getUTCMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getUTCMinutes()) : stringFormattedMinutes=msgDate.getUTCMinutes();
 		msgDateFormatted = week_FR[msgDate.getUTCDay()] + ' ' + msgDate.getUTCDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
 
-		if(msg.sender == username){
+		if(msg.sender == 'Admin'){
+			$(".chat-area").append('<div class="message-sender-admin">' + msg.sender + '</div>');
+			$(".chat-area").append('<div class="message-admin">' + msg.data + '</div>');
+			$(".chat-area").append('<div class="message-date-left-admin">' + msgDateFormatted + '</div>');
+		}
+		else if(msg.sender == username){
 			$(".chat-area").append('<div class="message-self">' + msg.data + '</div>');
 			$(".chat-area").append('<div class="message-date-right">' + msgDateFormatted + '</div>');
 		} else {
@@ -36,28 +43,10 @@ class MessageObserver {
 	}
 
 	displayOldMessages(oldMsgList){
-		let msgDate;
-		let msgDateFormatted;
 		$('.chat-area').empty();
 		for(let i = 0; i < oldMsgList.length; i++){
-			msgDate = new Date(oldMsgList[i].timestamp);
-			let estTimezoneHours = msgDate.getUTCHours() - 5;
-			let stringFormattedHours;
-			let stringFormattedMinutes;
-			estTimezoneHours < 10 ? (stringFormattedHours='0'+estTimezoneHours) : stringFormattedHours=estTimezoneHours;
-			msgDate.getUTCMinutes() < 10 ? (stringFormattedMinutes='0'+msgDate.getUTCMinutes()) : stringFormattedMinutes=msgDate.getUTCMinutes();
-			msgDateFormatted = week_FR[msgDate.getUTCDay()] + ' ' + msgDate.getUTCDate() + ', ' + stringFormattedHours + ':' + stringFormattedMinutes;
-
-			if(oldMsgList[i].sender == username){
-				$(".chat-area").append('<div class="message-self">' + oldMsgList[i].data + '</div>');
-				$(".chat-area").append('<div class="message-date-right">' + msgDateFormatted + '</div>');
-			} else {
-				$(".chat-area").append('<div class="message-sender">' + oldMsgList[i].sender + '</div>');
-				$(".chat-area").append('<div class="message">' + oldMsgList[i].data + '</div>');
-				$(".chat-area").append('<div class="message-date-left">' + msgDateFormatted + '</div>');
-			}
+			messageObserver.displayMessage(oldMsgList[i]);
 		}
-		$(".chat-area").scrollTop($(".chat-area")[0].scrollHeight);
 	}
 
 	getMessagesActiveChannel(activeChannelId){
@@ -70,13 +59,13 @@ class MessageObserver {
 	sendMessage() {
 		if($("#message-input").val() != ''){
     		// Création d'un objet msg qui contient les données dont le serveur a besoin pour traiter le message
-    		var msg = new Message("onMessage", "dbf646dc-5006-4d9f-8815-fd37514818ee", $("#message-input").val(), "testName", Date());
+    		var msg = new Message("onMessage", channelObserver.activeChannelID, $("#message-input").val(), username, Date());
     		// Envoi de l'objet msg à travers une chaîne formatée en JSON
     		if (client.readyState==1) {
       			client.send(JSON.stringify(msg));
     		}
   			// Efface le texte de l'élément input afin de recevoir la prochaine ligne de texte que l'utilisateur va saisir
-  			$("#message-input").val("");
+  			$("#message-input").val("").focus();
 		}
 	}
 

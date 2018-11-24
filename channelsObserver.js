@@ -11,42 +11,17 @@ class ChannelObserver{
     let msgRequestCreateChannel = new Message("onCreateChannel", generatedChannelID, channelNameBox, username, Date());
     if (client.readyState==1) {
       client.send(JSON.stringify(msgRequestCreateChannel));
-    } 
-  }
-
-  joinChannel(channel){
-    if(channel.joinStatus){
-      channelObserver.setActiveChannel(channel);
-      messageObserver.getMessagesActiveChannel(this.activeChannelID);   
     }
+    $("#message-input").focus(); 
   }
 
-  requestJoinChannel(channelID){
-    let msgRequestJoinChannel = new Message("onJoinChannel", channelID, "", username, Date());
-    if (client.readyState==1) {
-      client.send(JSON.stringify(msgRequestJoinChannel));
-    }
-  }
-
-  requestLeaveChannel(channelID){
-    let msgRequestLeaveChannel = new Message("onLeaveChannel", channelID, "", username, Date());
-    if (client.readyState==1) {
-      client.send(JSON.stringify(msgRequestLeaveChannel));
-    }
-  }
-
-  setActiveChannel(channel){
-    this.activeChannelName = channel.name;
-    this.activeChannelID = channel.id
-    $(".groupe-actif").empty();
-    $(".groupe-actif").append('<h3 id="groupe-actif-titre">Groupe actif:</h3><h2 id="groupe-actif-nom">'+ this.activeChannelName +'</h2>');
-  }
-
-  updateChannelsList(data){
+  displayChannels(){
     $(".group-list-area").empty();
     let channelBckColor = "#f7f7f7";
-    for(let index = 0; index < data.length; index++){
-      let channel = new Channel(data[index].id, data[index].name, data[index].joinStatus, data[index].messages, data[index].numberOfUsers);
+    let channelsListEntries = this.channelsList.keys();
+    for(let index = 0; index < this.channelsList.size; index++){
+      let channelKey = channelsListEntries.next().value;
+      let channel = new Channel(this.channelsList.get(channelKey).id, this.channelsList.get(channelKey).name, this.channelsList.get(channelKey).joinStatus, this.channelsList.get(channelKey).messages, this.channelsList.get(channelKey).numberOfUsers);
       if(channel.name == "Général"){
         if(this.activeChannelName == "" && this.activeChannelID == "") {channelObserver.setActiveChannel(channel);}
         $(".group-list-area").prepend('<div id="channel_' + channel.id + '" class="group-list-elements" style="background-color: ' + channelBckColor + ';"><div id="icon_' + channel.id + '" class="group-list-star-icon"><i class="fas fa-star"></i></div><div id="group-list-name"><strong>' + channel.name + '</strong></div><div id="default-label"><p>défaut</p></div></div>');
@@ -66,8 +41,6 @@ class ChannelObserver{
       $('#channel_' + channel.id).click(function(){
          channelObserver.joinChannel(channel);
       })
-      //$(".group-list-elements").click(function)
-      this.channelsList.set(channel.id, channel);
 
       if(channelBckColor == "#f7f7f7"){
         channelBckColor = "#eaeaea";
@@ -75,5 +48,71 @@ class ChannelObserver{
         channelBckColor = "#f7f7f7";
       }
     }
+  }
+
+  joinChannel(channel){
+    if(channel.joinStatus){
+      channelObserver.setActiveChannel(channel);
+      messageObserver.getMessagesActiveChannel(this.activeChannelID);   
+    }
+    $("#message-input").val("").focus();
+  }
+
+  requestJoinChannel(channelID){
+    let msgRequestJoinChannel = new Message("onJoinChannel", channelID, "", username, Date());
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msgRequestJoinChannel));
+    }
+    channelObserver.sortChannels();
+    $("#message-input").focus();
+  }
+
+  requestLeaveChannel(channelID){
+    let msgRequestLeaveChannel = new Message("onLeaveChannel", channelID, "", username, Date());
+    if (client.readyState==1) {
+      client.send(JSON.stringify(msgRequestLeaveChannel));
+    }
+    channelObserver.sortChannels();
+    $("#message-input").focus();
+  }
+
+  setActiveChannel(channel){
+    this.activeChannelName = channel.name;
+    this.activeChannelID = channel.id
+    $(".groupe-actif").empty();
+    $(".groupe-actif").append('<h3 id="groupe-actif-titre">Groupe actif:</h3><h2 id="groupe-actif-nom">'+ this.activeChannelName +'</h2>');
+  }
+
+  sortChannels(){
+    let tempList = new Map();
+    for(let [k, v] of this.channelsList){
+      if(v.name == "Général"){
+        tempList.set(k, v);
+        break;
+      }
+    }
+
+    for(let [k, v] of this.channelsList){
+      if(v.joinStatus == true && v.name != "Général"){
+        tempList.set(k, v);
+      }
+    }
+
+    for(let [k, v] of this.channelsList){
+      if(v.joinStatus == false){
+        tempList.set(k, v);
+      }
+    }
+    this.channelsList = tempList;
+
+    channelObserver.displayChannels();
+  }
+
+  updateChannelsList(data){
+    for(let index = 0; index < data.length; index++){
+      let channel = new Channel(data[index].id, data[index].name, data[index].joinStatus, data[index].messages, data[index].numberOfUsers);
+      this.channelsList.set(index, channel);
+    }
+    channelObserver.sortChannels();
   }
 }

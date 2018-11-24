@@ -10,24 +10,11 @@
 	- Se connecter au serveur avec un autre nom d'utilisateur
 	- Ajouter une option de changement de la langue de l'interface
 
-
-Section de clavardage
-- TODO: Entête de la vue des messages, s'assurer a join le groupe avant de permettre l'affichage du groupe actif.
-
-- TODO: Zone de messagerie
-	- Afficher les messages d'événements d'une couleur différente
-
 Section de la liste des groupes de discussion
-- TODO: l'entête de la vue contenant la liste des groupes disponibles
 
 - BONUS: 
 	- Activer/Désactiver un court son adapté (bip) lors de la réception d'un message
 	- Limiter le nombre de groupes à afficher
-	
-- TODO: Liste des groupes de discussion
-	- Mise-à-jour de la vue de cette liste (défaut->moins->plus)
-	- Sélection d'un groupe: afficher le nom dans l'entête du groupe actif (voir plus haut)
-	- Charge la liste des messages de ce channel
 	
 - BONUS: Meilleure présentation de la liste des groupes de discussion
 
